@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidney Disease Prediction System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+        .card {
+            border-radius: 15px;
+        }
+        .card-header {
+            background: #4c51bf;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .form-control, .form-control:focus {
+            background-color: #edf2f7;
+            color: #2d3748;
+            border-color: #4c51bf;
+        }
+        .btn-primary {
+            background-color: #4c51bf;
+            border-color: #4c51bf;
+        }
+        .btn-primary:hover {
+            background-color: #5a67d8;
+            border-color: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header text-center">
+            <h2 class="mb-0">Kidney Disease Prediction System</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" action="/predict">
+                <div class="form-group">
+                    <label for="Age">Age</label>
+                    <input type="number" class="form-control" id="Age" name="Age" min="0" max="120" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Blood_Pressure">Blood Pressure</label>
+                    <input type="number" class="form-control" id="Blood_Pressure" name="Blood_Pressure" min="0" max="200" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Specific_Gravity">Specific Gravity</label>
+                    <input type="number" class="form-control" id="Specific_Gravity" name="Specific_Gravity" min="1.000" max="1.030" step="0.001" required>
+                </div>
+                <div class="form-group">
+                    <label for="Albumin">Albumin</label>
+                    <input type="number" class="form-control" id="Albumin" name="Albumin" min="0" max="5" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Sugar">Sugar</label>
+                    <input type="number" class="form-control" id="Sugar" name="Sugar" min="0" max="5" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Red_Blood_Cells">Red Blood Cells</label>
+                    <select class="form-control" id="Red_Blood_Cells" name="Red_Blood_Cells" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Pus_Cell">Pus Cell</label>
+                    <select class="form-control" id="Pus_Cell" name="Pus_Cell" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Pus_Cell_Clumps">Pus Cell Clumps</label>
+                    <select class="form-control" id="Pus_Cell_Clumps" name="Pus_Cell_Clumps" required>
+                        <option value="notpresent">Not Present</option>
+                        <option value="present">Present</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Bacteria">Bacteria</label>
+                    <select class="form-control" id="Bacteria" name="Bacteria" required>
+                        <option value="notpresent">Not Present</option>
+                        <option value="present">Present</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Blood_Glucose_Random">Blood Glucose Random</label>
+                    <input type="number" class="form-control" id="Blood_Glucose_Random" name="Blood_Glucose_Random" min="0.0" max="500.0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Blood_Urea">Blood Urea</label>
+                    <input type="number" class="form-control" id="Blood_Urea" name="Blood_Urea" min="0.0" max="200.0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Serum_Creatinine">Serum Creatinine</label>
+                    <input type="number" class="form-control" id="Serum_Creatinine" name="Serum_Creatinine" min="0.0" max="15.0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Sodium">Sodium</label>
+                    <input type="number" class="form-control" id="Sodium" name="Sodium" min="0.0" max="200.0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Potassium">Potassium</label>
+                    <input type="number" class="form-control" id="Potassium" name="Potassium" min="0.0" max="10.0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Hemoglobin">Hemoglobin</label>
+                    <input type="number" class="form-control" id="Hemoglobin" name="Hemoglobin" min="0.0" max="20.0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Packed_Cell_Volume">Packed Cell Volume</label>
+                    <input type="number" class="form-control" id="Packed_Cell_Volume" name="Packed_Cell_Volume" min="0.0" max="60.0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="White_Blood_Cell_Count">White Blood Cell Count</label>
+                    <input type="number" class="form-control" id="White_Blood_Cell_Count" name="White_Blood_Cell_Count" min="0.0" max="30000.0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Red_Blood_Cell_Count">Red Blood Cell Count</label>
+                    <input type="number" class="form-control" id="Red_Blood_Cell_Count" name="Red_Blood_Cell_Count" min="0.0" max="10.0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Hypertension">Hypertension</label>
+                    <select class="form-control" id="Hypertension" name="Hypertension" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Diabetes_Mellitus">Diabetes Mellitus</label>
+                    <select class="form-control" id="Diabetes_Mellitus" name="Diabetes_Mellitus" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Coronary_Artery_Disease">Coronary Artery Disease</label>
+                    <select class="form-control" id="Coronary_Artery_Disease" name="Coronary_Artery_Disease" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Appetite">Appetite</label>
+                    <select class="form-control" id="Appetite" name="Appetite" required>
+                        <option value="good">Good</option>
+                        <option value="poor">Poor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Pedal_Edema">Pedal Edema</label>
+                    <select class="form-control" id="Pedal_Edema" name="Pedal_Edema" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Anemia">Anemia</label>
+                    <select class="form-control" id="Anemia" name="Anemia" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-4">Predict</button>
+            </form>
+            {% if prediction %}
+                <div class="alert alert-info text-center mt-4">{{ prediction }}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
